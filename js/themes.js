@@ -1,14 +1,19 @@
 const themeBtn = document.getElementById("theme-btn-toggle");
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+const usersColorScheme = window.matchMedia(
+  "(prefers-color-scheme: dark)"
+).matches;
 
-themeBtn.addEventListener("click", function () {
+const invertColorScheme = function (currentColorScheme) {
   // If the OS is set to dark mode...
-  if (prefersDarkScheme.matches) {
-    // ...then apply the .light-theme class to override those styles
+  if (currentColorScheme) {
+    // Dark
     document.body.classList.toggle("light-theme");
-    // Otherwise...
   } else {
-    // ...apply the .dark-theme class to override the default light styles
+    // Light
     document.body.classList.toggle("dark-theme");
   }
+};
+
+themeBtn.addEventListener("click", function () {
+  invertColorScheme(usersColorScheme);
 });
