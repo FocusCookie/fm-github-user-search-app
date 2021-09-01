@@ -5,16 +5,25 @@
 
   --btn--text-color: #4b6a9b;
   --btn--text-color--hover: #222731;
+  --btn--radius: 0.625em;
 
   --color-primary: #0079ff;
+  --color-primary--disabled: #60abff;
   --color-btn-text: #fff;
   --color-backgrounds: #f6f8ff;
+  --color-error: #f74646;
 
   --card-background: #fefefe;
   --card-radius: 15px;
 
+  --stats--radius: 15px;
+
   --card-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+
+  --max-width-site: 730px;
 }
+
+/* TODO: font sizes are on 16px as 1em the design is full of different sizes, neet do fix that */
 
 html,
 body {
@@ -32,12 +41,10 @@ body {
 body {
   background: var(--color-backgrounds);
   color: var(--color-text);
-
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-
   padding: 31px 24px;
 }
 
@@ -57,11 +64,12 @@ body.dark-theme {
 }
 
 header {
+  width: 100%;
+  max-width: var(--max-width-site);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
-  width: 100%;
+  margin-bottom: 1.3125em;
 }
 
 .card {
@@ -71,8 +79,17 @@ header {
 }
 
 .btn {
+  display: block;
   background: var(--color-primary);
   color: var(--color-btn-text);
+  padding: 0.75em 0.875em;
+  border-radius: var(--btn--radius);
+  text-decoration: none;
+  font-size: 0.875em;
+  outline: none;
+}
+.btn--disabled {
+  background: var(--color-primary--disabled);
 }
 
 .btn--text,
@@ -94,7 +111,135 @@ header {
   font-size: 1.625em;
   color: var(--color-text--strong);
   font-weight: 700;
-  line-height: 2.4375em;
+}
+
+.pa-1 {
+  padding: 0.625em;
+}
+
+.pa-content {
+  padding: 2em 1.5em 3em 1.5em;
+}
+
+.searchbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4375em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  width: 100%;
+  max-width: var(--max-width-site);
+}
+.searchbar:focus-within {
+  border-radius: var(--card-radius);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+.searchbar--icon {
+  height: 1.25em;
+  width: 1.25em;
+}
+.searchbar--input {
+  font-size: 0.8125em;
+  background: none;
+  caret-color: var(--color-primary);
+  border: none;
+  flex-grow: 1;
+  color: var(--color-text--strong);
+}
+.searchbar--input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-text);
+}
+.searchbar--input:focus {
+  outline: none;
+}
+
+.userprofile {
+  width: 100%;
+  max-width: var(--max-width-site);
+}
+.userprofile--name {
+  font-size: 1em;
+  color: var(--color-text--strong);
+}
+.userprofile--picture {
+  border-radius: 50%;
+}
+.userprofile--acountlink {
+  color: var(--color-primary);
+}
+#user-picture {
+  grid-area: user-picture;
+}
+#user-link {
+  grid-area: user-link;
+}
+#user-joindate {
+  grid-area: user-joindate;
+}
+.userprofile--user {
+  display: grid;
+  grid-template-columns: auto 3fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "user-picture user-name"
+    "user-picture user-link"
+    "user-picture user-joindate";
+  grid-column-gap: 1.1875em;
+}
+.userprofile--bio {
+  margin-top: 2.0625em;
+  font-size: 0.8125em;
+}
+
+.userprofile--stats {
+  background: var(--color-backgrounds);
+  border-radius: var(--stats--radius);
+  display: grid;
+  justify-items: center;
+  margin-top: 1.4275em;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 1.125em 0.875em;
+}
+.userprofile--stats-label {
+  font-size: 0.6875em;
+}
+.userprofile--stats-number {
+  color: var(--color-text--strong);
+  font-weight: 700;
+}
+
+.userprofile--links {
+  columns: 1;
+}
+.userprofile--links > p {
+  margin-top: 0.625em;
+}
+.user-link {
+  font-size: 0.9375em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.user-link:hover {
+  text-decoration: underline;
+}
+.mr-linkicon {
+  margin-right: 0.375em;
+}
+.notavailable {
+  opacity: 0.5;
+}
+.user-links--icon path {
+  fill: var(--color-text);
+}
+
+.text--error {
+  color: var(--color-error);
+}
+.hidden {
+  display: none;
 }
 
 /* Styles for users who prefer dark mode at the OS level */
