@@ -23,8 +23,6 @@
   --max-width-site: 730px;
 }
 
-/* TODO: font sizes are on 16px as 1em the design is full of different sizes, neet do fix that */
-
 html,
 body {
   height: 100vh;
@@ -144,7 +142,7 @@ header {
   background: none;
   caret-color: var(--color-primary);
   border: none;
-  flex-grow: 1;
+  width: 100%;
   color: var(--color-text--strong);
 }
 .searchbar--input::placeholder {
@@ -236,6 +234,7 @@ header {
 }
 
 .text--error {
+  font-size: 0.9375em;
   color: var(--color-error);
 }
 .hidden {
