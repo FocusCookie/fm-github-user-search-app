@@ -20,7 +20,7 @@
 
   --card-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 
-  --max-width-site: 730px;
+  --max-width-site: 573px;
 }
 
 html,
@@ -44,6 +44,7 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 31px 24px;
+  transition: all 200ms ease;
 }
 
 /* Dark theme colors */
@@ -91,7 +92,7 @@ header {
 }
 
 .btn--text,
-.theme-icon path {
+#theme-icon path {
   display: flex;
   align-items: center;
   gap: 1em;
@@ -100,7 +101,7 @@ header {
   text-decoration: none;
 }
 .btn--text:hover,
-.btn--text:hover > .theme-icon path {
+.btn--text:hover > #theme-icon path {
   color: var(--btn--text-color--hover);
   fill: var(--btn--text-color--hover);
 }
@@ -156,47 +157,52 @@ header {
 .userprofile {
   width: 100%;
   max-width: var(--max-width-site);
+  display: grid;
+  grid-template-areas:
+    "userprofile--picture userprofile--name"
+    "userprofile--picture userprofile--accountlink"
+    "userprofile--picture userprofile--joindate"
+    "userprofile--bio userprofile--bio"
+    "userprofile--stats userprofile--stats"
+    "user-location user-location"
+    "userprofile--links userprofile--links";
 }
 .userprofile--name {
+  grid-area: userprofile--name;
   font-size: 1em;
   color: var(--color-text--strong);
 }
+
+.userprofile--joindate {
+  grid-area: userprofile--joindate;
+}
+
 .userprofile--picture {
+  grid-area: userprofile--picture;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
 }
 .userprofile--acountlink {
+  grid-area: userprofile--accountlink;
   color: var(--color-primary);
 }
-#user-picture {
-  grid-area: user-picture;
-}
-#user-link {
-  grid-area: user-link;
-}
-#user-joindate {
-  grid-area: user-joindate;
-}
-.userprofile--user {
-  display: grid;
-  grid-template-columns: auto 3fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas:
-    "user-picture user-name"
-    "user-picture user-link"
-    "user-picture user-joindate";
-  grid-column-gap: 1.1875em;
-}
+
 .userprofile--bio {
+  grid-area: userprofile--bio;
+  color: var(--color-text);
   margin-top: 2.0625em;
   font-size: 0.8125em;
 }
 
 .userprofile--stats {
+  grid-area: userprofile--stats;
   background: var(--color-backgrounds);
   border-radius: var(--stats--radius);
   display: grid;
   justify-items: center;
   margin-top: 1.4275em;
+
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 1.125em 0.875em;
@@ -209,12 +215,32 @@ header {
   font-weight: 700;
 }
 
+#user-location {
+  grid-area: user-location;
+}
+#user-blog {
+  grid-area: user-blog;
+}
+#user-twitter {
+  grid-area: user-twitter;
+}
+#user-company {
+  grid-area: user-company;
+}
+
 .userprofile--links {
-  columns: 1;
+  margin-top: 1.875em;
+  grid-area: userprofile--links;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1em;
+  grid-template-areas:
+    "user-location"
+    "user-blog"
+    "user-twitter"
+    "user-company";
 }
-.userprofile--links > p {
-  margin-top: 0.625em;
-}
+
 .user-link {
   font-size: 0.9375em;
   color: var(--color-text);
@@ -234,6 +260,7 @@ header {
 }
 
 .text--error {
+  white-space: nowrap;
   font-size: 0.9375em;
   color: var(--color-error);
 }
@@ -252,5 +279,73 @@ header {
   body.light-theme {
     --color-text: #222;
     --color-backgrounds: #fff;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  body {
+    --max-width-site: 730px;
+  }
+
+  .userprofile {
+    grid-template-columns: 9.875em 1fr;
+    grid-template-areas:
+      "userprofile--picture userprofile--name"
+      "userprofile--picture userprofile--accountlink"
+      "userprofile--picture userprofile--joindate"
+      "userprofile--bio userprofile--bio"
+      "userprofile--stats userprofile--stats"
+      "user-location user-location"
+      "userprofile--links userprofile--links";
+    align-items: center;
+  }
+
+  .userprofile--stats {
+    justify-items: left;
+    padding: 1em 2em;
+  }
+
+  .userprofile--picture {
+    margin-left: 0.72em;
+    height: 117px;
+    width: 117px;
+  }
+
+  .userprofile--links {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "user-location user-twitter"
+      "user-blog user-company";
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .userprofile {
+    grid-template-columns: 202px 1fr 1fr;
+    grid-template-areas:
+      "userprofile--picture userprofile--name userprofile--joindate"
+      "userprofile--picture userprofile--accountlink userprofile--accountlink"
+      "userprofile--picture userprofile--bio userprofile--bio"
+      "none userprofile--bio userprofile--bio"
+      "none userprofile--stats userprofile--stats"
+      "none user-location user-location"
+      "none userprofile--links userprofile--links";
+  }
+
+  .userprofile--bio {
+    margin: 0;
+  }
+
+  .userprofile--picture {
+    margin-left: 2em;
+  }
+
+  .userprofile--name {
+    font-size: 1.625em;
+  }
+  .userprofile--joindate {
+    justify-self: end;
+    font-size: 0.9375em;
   }
 }
